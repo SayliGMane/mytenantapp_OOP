@@ -94,7 +94,7 @@ def main():
 
                 if option == 1:
                     # TODO: INSERT OWNER
-                    Owner_detail: dict[str,str] = DataInput.input_for_owner_insert()
+                    Owner_detail= DataInput.input_for_owner_insert()
                     owner: Optional['Owner'] = Owner.insert_data(**Owner_detail)
 
                     if owner:
