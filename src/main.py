@@ -1,4 +1,5 @@
 from src.db.models.owner import Owner
+from src.db.models.flat import Flat
 #from src.db.models.book import Book
 from typing import Optional
 
@@ -70,6 +71,33 @@ class DataInput():
             "owner": owner 
         }
     
+
+    @staticmethod
+    def input_for_flatdetails_insert():
+        floorno = int(input('Enter floorno: '))
+        flatno = int(input('Enter the flatno: '))
+        furnished = input('Enter the furnished YES/NO: ')
+        facilities = (input("Enter the facilities available: "))
+        propertytype = (input("Enter Property type '2BHK','1BHK','SHOP':"))
+        area_in_m2 = int(input("Enter the area of the property: "))
+        price_range = (input("Enter price range : "))
+        available_from = (input("Enter the date property available from: "))
+        
+
+
+        return {
+            "floorno": floorno,
+            "flatno": flatno,
+            "furnished": furnished,
+            "facilities": facilities,
+            "propertytype":propertytype,
+            "area_in_m2":area_in_m2,
+            "price_range":price_range,
+            "available_from":available_from
+
+
+        }
+    
     # @staticmethod
     # def input_for_DQ_option_one():
     #     format_ = input('Enter a format(ebook, hardcover): ')
@@ -102,6 +130,13 @@ def main():
                     else:
                         print('Insertion failed')                   
                 elif option == 2:
+                    flat_detail= DataInput.input_for_flatdetails_insert()
+                    flat: Optional['Flat'] = Flat.insert_data(**flat_detail)
+
+                    if flat:
+                        print(f'Owner with username: {flat.flatno} inserted successfully')
+                    else:
+                        print('Insertion failed')   
                     # TODO: INSERT BOOK
                     pass
                 elif option == 3:

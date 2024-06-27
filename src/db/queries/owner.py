@@ -15,7 +15,9 @@ def insert_data(flat_owner_id:int , flatno: int, bank_details: str, owner: json)
        """
     with conn.cursor() as cursor:
 
-        cursor.execute(query, (flat_owner_id, flatno, bank_details, owner))
+        owner_json = json.dumps(owner)
+
+        cursor.execute(query, (flat_owner_id, flatno, bank_details, owner_json))
         owner = cursor.fetchone()
         conn.commit()
     return owner
